@@ -57,7 +57,7 @@ Before running an experiment, configure:
 | Essay input and intermediate paths | `data_func.py` and the selected entry-point script. |
 | Generation output path | `output_dir` in the entry point. |
 | Essay range and concurrency | `START_NUM`, `END_NUM`, and `PARALLEL_NUM`. |
-| API endpoint, credentials, and model identifier | The selected entry point and any imported provider/workflow helpers. |
+| API endpoint and model identifier | The selected entry point and any imported provider/workflow helpers. |
 | Elasticsearch endpoint and index names | `indexing.py` and the retrieval entry points; the current endpoint is `http://localhost:9200`. |
 | Index mappings and JSONL corpus | Paths in `indexing.py`. |
 | Rubric or example files | `rule_path` and sample-file paths used by the selected script. |
@@ -65,7 +65,16 @@ Before running an experiment, configure:
 
 The scripts contain Windows paths rooted at `D:\zuowen`. Update all relevant paths, including those in shared helper modules. Changing only the `root_dir` argument does not change the input location used by `data_func.input_deal()`.
 
-Configure your own API credentials locally. Some functions read `DASHSCOPE_API_KEY` from the environment, while other clients use script-level settings; a `.env` file alone does not configure every client. Keep credentials out of version control. Model identifiers and workflow availability must be checked against the services you actually use.
+Copy [`.env.example`](.env.example) to `.env` in the repository root and fill in your own credentials locally. Scripts load this file through `python-dotenv`; existing environment variables take precedence. `.env` and Python bytecode caches are excluded from Git.
+
+| Environment variable | Service |
+| --- | --- |
+| `DASHSCOPE_API_KEY` | DashScope generation and related helpers. |
+| `COZE_API_TOKEN` | Coze clients and evaluation workflows, including shared helper imports. |
+| `JIEKOU_API_KEY` | The provider used by `jiekou.py`. |
+| `OPENROUTER_API_KEY` | OpenRouter generation. |
+
+Keep credentials out of version control. Configure the endpoints, workflow IDs, and model names separately in the scripts. Model identifiers and workflow availability must be checked against the services you actually use.
 
 ## Data format
 
@@ -131,7 +140,7 @@ Input and generated-output filename formatting differ for single-digit IDs in th
 
 ### 3. Evaluate feedback
 
-In `pinggu.py`, configure your Coze credentials, workflow ID, input directory, output file, essay range, and concurrency. The workflow receives:
+Set `COZE_API_TOKEN` in your local `.env`. In `pinggu.py`, configure the workflow ID, input directory, output file, essay range, and concurrency. The workflow receives:
 
 | Parameter | Content |
 | --- | --- |

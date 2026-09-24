@@ -2,6 +2,8 @@ import os
 import requests
 import json
 from dotenv import load_dotenv
+
+load_dotenv()
 import numpy as np
 from sentence_transformers import SentenceTransformer 
 import re
@@ -26,7 +28,7 @@ LLM_MODEL = "RAG_problem_only"
 #7595041545120792611  recall        7641890494687641609   precision
 # 配置参数
 CONFIG = {
-    "coze_api_token": "REMOVED_USE_ENVIRONMENT_VARIABLE",
+    "coze_api_token": os.environ["COZE_API_TOKEN"],
     "coze_api_base": COZE_CN_BASE_URL,
     "workflow_id" : '7641890494687641609',
     "in_dir": r"D:\zuowen\data\eval\temp\\"+LLM_MODEL,

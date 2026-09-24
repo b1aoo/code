@@ -2,6 +2,8 @@ import os
 import requests
 import json
 from dotenv import load_dotenv
+
+load_dotenv()
 import numpy as np
 from sentence_transformers import SentenceTransformer 
 import re

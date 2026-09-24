@@ -2,6 +2,8 @@ import os
 import requests
 import json
 from dotenv import load_dotenv
+
+load_dotenv()
 import numpy as np
 from sentence_transformers import SentenceTransformer 
 import re
@@ -20,7 +22,7 @@ from cozepy import Coze, TokenAuth, Stream, WorkflowEvent, WorkflowEventType
 from data_func import comment_upgrade,extract_dimension_content
 from search_func import processESIndex_Knn
 from concurrent.futures import ThreadPoolExecutor
-coze_api_token = 'REMOVED_USE_ENVIRONMENT_VARIABLE'
+coze_api_token = os.environ["COZE_API_TOKEN"]
 
 # 默认访问地址为api.coze.com，如需访问api.coze.cn，
 # 请使用base_url配置API端点

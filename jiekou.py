@@ -2,6 +2,8 @@ import os
 import requests
 import json
 from dotenv import load_dotenv
+
+load_dotenv()
 import numpy as np
 from sentence_transformers import SentenceTransformer 
 import re
@@ -44,7 +46,7 @@ def grade_essay_no_change(title, essay_content, sample, model_name):
 """
 
         client = OpenAI(
-            api_key="REMOVED_USE_ENVIRONMENT_VARIABLE",
+            api_key=os.environ["JIEKOU_API_KEY"],
             base_url="https://api.jiekou.ai/openai",
             timeout=120
         )
@@ -76,7 +78,7 @@ LLM_MODEL = "moonshotai/kimi-k2-0905"
 REQUEST_DELAY = 3.0       # 适配 5 并发的安全延迟
 # ==============================================================
 
-coze_api_token = 'REMOVED_USE_ENVIRONMENT_VARIABLE'
+coze_api_token = os.environ["COZE_API_TOKEN"]
 coze_api_base = COZE_CN_BASE_URL
 coze = Coze(auth=TokenAuth(token=coze_api_token), base_url=coze_api_base)
 workflow_id = '7595041545120792611'

@@ -2,6 +2,8 @@ import os
 import requests
 import json
 from dotenv import load_dotenv
+
+load_dotenv()
 import numpy as np
 from sentence_transformers import SentenceTransformer 
 import re
@@ -89,7 +91,7 @@ def grade_essay_no_change(essay_content, DASHSCOPE_API_KEY,model_name):
     except Exception as e:
         return f"处理过程中出错：{str(e)}"
 # 通过个人访问令牌或oauth获取access_token。
-coze_api_token = 'REMOVED_USE_ENVIRONMENT_VARIABLE'
+coze_api_token = os.environ["COZE_API_TOKEN"]
 coze_api_base = COZE_CN_BASE_URL
 coze = Coze(auth=TokenAuth(token=coze_api_token), base_url=coze_api_base)
 workflow_id = '7595041545120792611'
